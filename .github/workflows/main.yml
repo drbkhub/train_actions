@@ -1,0 +1,22 @@
+name: Add Emoji to Commit
+
+on:
+  push:
+    branches:
+      - main # Замените на вашу основную ветку
+
+jobs:
+  add_emoji:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Add emoji to commit
+      run: |
+        EMOJI="🚀" # Замените на свой смайлик
+        COMMIT_MSG="$(git log -1 --pretty=%B)"
+        NEW_COMMIT_MSG="$COMMIT_MSG $EMOJI"
+        git commit --amend -m "$NEW_COMMIT_MSG"
+        git push --force origin main # Замените на вашу основную ветку
